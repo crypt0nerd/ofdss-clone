@@ -1,16 +1,17 @@
-// ===== OFDSS - Testimonials Carousel =====
+// ===== OFDSS - Carousels =====
 
 class Carousel {
-  constructor(element) {
+  constructor(element, options = {}) {
     this.el = element;
-    this.track = element.querySelector('.carousel__track');
-    this.slides = [...element.querySelectorAll('.carousel__slide')];
-    this.dots = [...element.querySelectorAll('.carousel__dot')];
-    this.prevBtn = element.querySelector('.carousel__arrow--prev');
-    this.nextBtn = element.querySelector('.carousel__arrow--next');
+    this.track = element.querySelector(options.trackSelector || '.carousel__track');
+    this.slides = [...this.track.children];
+    this.dots = [...element.querySelectorAll(options.dotSelector || '.carousel__dot')];
+    this.prevBtn = element.querySelector(options.prevSelector || '.carousel__arrow--prev');
+    this.nextBtn = element.querySelector(options.nextSelector || '.carousel__arrow--next');
     this.currentIndex = 0;
     this.autoPlayInterval = null;
-    this.autoPlayDelay = 8000;
+    this.autoPlayDelay = options.autoPlayDelay || 8000;
+    this.autoPlay = options.autoPlay !== false;
     this.touchStartX = 0;
     this.touchEndX = 0;
 
@@ -20,7 +21,6 @@ class Carousel {
   }
 
   init() {
-    // Arrow navigation
     if (this.prevBtn) {
       this.prevBtn.addEventListener('click', () => {
         this.prev();
@@ -35,7 +35,6 @@ class Carousel {
       });
     }
 
-    // Dot navigation
     this.dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         this.goTo(index);
@@ -43,7 +42,6 @@ class Carousel {
       });
     });
 
-    // Touch/swipe support
     this.track.addEventListener('touchstart', (e) => {
       this.touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
@@ -53,12 +51,12 @@ class Carousel {
       this.handleSwipe();
     }, { passive: true });
 
-    // Pause on hover
     this.el.addEventListener('mouseenter', () => this.stopAutoPlay());
-    this.el.addEventListener('mouseleave', () => this.startAutoPlay());
+    this.el.addEventListener('mouseleave', () => {
+      if (this.autoPlay) this.startAutoPlay();
+    });
 
-    // Start autoplay
-    this.startAutoPlay();
+    if (this.autoPlay) this.startAutoPlay();
   }
 
   goTo(index) {
@@ -68,7 +66,6 @@ class Carousel {
     this.currentIndex = index;
     this.track.style.transform = `translateX(-${index * 100}%)`;
 
-    // Update dots
     this.dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === index);
     });
@@ -85,11 +82,8 @@ class Carousel {
   handleSwipe() {
     const diff = this.touchStartX - this.touchEndX;
     if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        this.next();
-      } else {
-        this.prev();
-      }
+      if (diff > 0) this.next();
+      else this.prev();
       this.restartAutoPlay();
     }
   }
@@ -108,14 +102,31 @@ class Carousel {
 
   restartAutoPlay() {
     this.stopAutoPlay();
-    this.startAutoPlay();
+    if (this.autoPlay) this.startAutoPlay();
   }
 }
 
-// Initialize carousel when DOM is ready
+// Initialize carousels when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  const carouselEl = document.querySelector('.carousel');
-  if (carouselEl) {
-    new Carousel(carouselEl);
+  // Testimonials carousel
+  const testimonialEl = document.querySelector('.carousel');
+  if (testimonialEl) {
+    new Carousel(testimonialEl, {
+      autoPlayDelay: 8000,
+      autoPlay: true
+    });
+  }
+
+  // Domains carousel
+  const domainsEl = document.querySelector('.domains-carousel');
+  if (domainsEl) {
+    new Carousel(domainsEl, {
+      trackSelector: '.domains-carousel__track',
+      dotSelector: '.domains-carousel__dot',
+      prevSelector: '.domains-carousel__arrow--prev',
+      nextSelector: '.domains-carousel__arrow--next',
+      autoPlayDelay: 6000,
+      autoPlay: true
+    });
   }
 });

@@ -142,20 +142,38 @@
         <h2 class="section-title section-title--center">What does OFDSS cover?</h2>
         <p>79 individual security requirements across 13 control domains</p>
       </div>
-      <div class="domains__list">
-        <div class="domain-tag"><span class="domain-tag__number">1</span> Resource Allocation</div>
-        <div class="domain-tag"><span class="domain-tag__number">2</span> Asset Management</div>
-        <div class="domain-tag"><span class="domain-tag__number">3</span> Access Controls</div>
-        <div class="domain-tag"><span class="domain-tag__number">4</span> Change Controls</div>
-        <div class="domain-tag"><span class="domain-tag__number">5</span> Software Development Life Cycle (SDLC)</div>
-        <div class="domain-tag"><span class="domain-tag__number">6</span> Cryptography</div>
-        <div class="domain-tag"><span class="domain-tag__number">7</span> Data Minimization</div>
-        <div class="domain-tag"><span class="domain-tag__number">8</span> Auditing and Alerting</div>
-        <div class="domain-tag"><span class="domain-tag__number">9</span> Incident Management</div>
-        <div class="domain-tag"><span class="domain-tag__number">10</span> Network Security</div>
-        <div class="domain-tag"><span class="domain-tag__number">11</span> Awareness and Training</div>
-        <div class="domain-tag"><span class="domain-tag__number">12</span> Vendor Management</div>
-        <div class="domain-tag"><span class="domain-tag__number">13</span> Independent Testing</div>
+      <div class="domains-carousel">
+        <div class="domains-carousel__track-container">
+          <div class="domains-carousel__track">
+            <!-- Slide 1: domains 1-6 -->
+            <div class="domains-carousel__slide">
+              <div class="domain-item"><span class="domain-item__number">1</span> Resource Allocation</div>
+              <div class="domain-item"><span class="domain-item__number">2</span> Asset Management</div>
+              <div class="domain-item"><span class="domain-item__number">3</span> Access Controls</div>
+              <div class="domain-item"><span class="domain-item__number">4</span> Change Controls</div>
+              <div class="domain-item"><span class="domain-item__number">5</span> Software Development Life Cycle (SDLC)</div>
+              <div class="domain-item"><span class="domain-item__number">6</span> Cryptography</div>
+            </div>
+            <!-- Slide 2: domains 7-13 -->
+            <div class="domains-carousel__slide">
+              <div class="domain-item"><span class="domain-item__number">7</span> Data Minimization</div>
+              <div class="domain-item"><span class="domain-item__number">8</span> Auditing and Alerting</div>
+              <div class="domain-item"><span class="domain-item__number">9</span> Incident Management</div>
+              <div class="domain-item"><span class="domain-item__number">10</span> Network Security</div>
+              <div class="domain-item"><span class="domain-item__number">11</span> Awareness and Training</div>
+              <div class="domain-item"><span class="domain-item__number">12</span> Vendor Management</div>
+              <div class="domain-item"><span class="domain-item__number">13</span> Independent Testing</div>
+            </div>
+          </div>
+        </div>
+        <div class="domains-carousel__arrows">
+          <button class="domains-carousel__arrow domains-carousel__arrow--prev" aria-label="Previous">&lsaquo;</button>
+          <button class="domains-carousel__arrow domains-carousel__arrow--next" aria-label="Next">&rsaquo;</button>
+        </div>
+        <div class="domains-carousel__nav">
+          <button class="domains-carousel__dot active" aria-label="Page 1"></button>
+          <button class="domains-carousel__dot" aria-label="Page 2"></button>
+        </div>
       </div>
     </div>
   </section>
@@ -320,7 +338,8 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
-      <p class="footer__text">&copy; 2024 Open Finance Data Security Standard. Powered by <a href="https://wordpress.org/" target="_blank" rel="noopener">WordPress</a>.</p>
+      <p class="footer__text">&copy; 2026 OFDSS. Powered by <a href="https://wordpress.org/" target="_blank" rel="noopener">WordPress</a>.</p>
+      <a href="#" class="footer__top-link">To the top &uarr;</a>
     </div>
   </footer>
 
